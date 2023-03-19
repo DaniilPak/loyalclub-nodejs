@@ -18,9 +18,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const routes = require("./routes/routes");
+import { UserRoute } from "./routes/dataRoute";
+const userRoute = new UserRoute();
 
-app.use("/api", routes);
+app.use("/api", userRoute.getRouter());
 
 app.listen(3000, () => {
   console.log(`Server Started at ${3000}`);

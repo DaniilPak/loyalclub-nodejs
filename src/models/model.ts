@@ -1,4 +1,4 @@
-export {};
+export {dataSchema};
 
 const mongoose = require('mongoose');
 
