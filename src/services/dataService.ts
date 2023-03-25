@@ -24,4 +24,13 @@ export class DataService {
       throw error;
     }
   }
+
+  public async getDataById(userId: string) {
+    try {
+      const data = await Data.findById(userId);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
