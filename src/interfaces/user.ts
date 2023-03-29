@@ -1,4 +1,4 @@
-import { Receipt } from "./receipt";
+import { Receipt } from "./Receipt";
 
 export interface User {
   type: "Client" | "Owner" | "Worker";

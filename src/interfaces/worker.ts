@@ -1,6 +1,6 @@
-import { User } from "./user";
-import { Receipt } from "./receipt";
-import { Business } from "./business";
+import { User } from "./User";
+import { Receipt } from "./Receipt";
+import { Business } from "./Business";
 
 export interface Worker extends User {
   type: "Worker";

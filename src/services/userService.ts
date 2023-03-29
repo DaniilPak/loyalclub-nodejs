@@ -1,7 +1,7 @@
-import { User } from "../interfaces/user";
-import { Worker } from "../interfaces/worker";
-import { Owner } from "../interfaces/owner";
-import { Receipt } from "../interfaces/receipt";
+import { User } from "../interfaces/User";
+import { Worker } from "../interfaces/Worker";
+import { Owner } from "../interfaces/Owner";
+import { Receipt } from "../interfaces/Receipt";
 
 const UserModel = require("../models/userModel");
 

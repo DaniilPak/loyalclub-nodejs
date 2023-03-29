@@ -1,5 +1,5 @@
-import { Worker } from "./worker";
-import { User } from "./user";
+import { Worker } from "./Worker";
+import { User } from "./User";
 
 export interface Receipt {
   restaurantName: string;

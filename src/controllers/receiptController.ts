@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { ReceiptService } from "../services/receiptService";
-import { Receipt } from "../interfaces/receipt";
+import { ReceiptService } from "../services/ReceiptService";
+import { Receipt } from "../interfaces/Receipt";
 const UserModel = require("../models/userModel");
 
 export class ReceiptController {

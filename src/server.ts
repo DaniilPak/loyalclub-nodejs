@@ -20,9 +20,9 @@ app.use(cors());
 app.use(express.json());
 
 /// API entry
-import { DataRoute } from "./routes/dataRoute";
-import { UserRoute } from "./routes/userRoute";
-import { ReceiptRoute } from "./routes/receiptRoute";
+import { DataRoute } from "./routes/DataRoute";
+import { UserRoute } from "./routes/UserRoute";
+import { ReceiptRoute } from "./routes/ReceiptRoute";
 
 const dataRoute = new DataRoute();
 const userRoute = new UserRoute();

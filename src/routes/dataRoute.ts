@@ -1,8 +1,8 @@
 export {};
 
 import { Router } from "express";
-import { DataService } from "../services/dataService";
-import { DataController } from "../controllers/dataController";
+import { DataService } from "../services/DataService";
+import { DataController } from "../controllers/DataController";
 
 import { checkToken } from "../middlewares/checkToken";
 

@@ -1,8 +1,8 @@
 export {};
 
 import { Router } from "express";
-import { ReceiptController } from "../controllers/receiptController";
-import { ReceiptService } from "../services/receiptService";
+import { ReceiptController } from "../controllers/ReceiptController";
+import { ReceiptService } from "../services/ReceiptService";
 
 export class ReceiptRoute {
   private readonly router: Router;

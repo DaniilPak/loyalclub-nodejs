@@ -1,5 +1,5 @@
-import { User } from "./user";
-import { Business } from "./business";
+import { User } from "./User";
+import { Business } from "./Business";
 
 export interface Owner extends User {
   type: "Owner";

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { DataService } from "../services/dataService";
-import { DataInterface } from "../interfaces/data";
+import { DataService } from "../services/DataService";
+import { DataInterface } from "../interfaces/Data";
 const jwt = require("jsonwebtoken");
 
 export class DataController {

@@ -1,7 +1,7 @@
 const Receipt = require("../models/receiptModel");
 const UserModel = require("../models/userModel");
 
-import { Receipt } from "../interfaces/receipt";
+import { Receipt } from "../interfaces/Receipt";
 
 export class ReceiptService {
   public async createReceipt(receipt: Receipt) {

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { UserService } from "../services/userService";
-import { User } from "../interfaces/user";
-import { Receipt } from "../interfaces/receipt";
+import { UserService } from "../services/UserService";
+import { User } from "../interfaces/User";
+import { Receipt } from "../interfaces/Receipt";
 
 export class UserController {
   private readonly userService: UserService;

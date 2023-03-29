@@ -1,8 +1,8 @@
 export {};
 
 import { Router } from "express";
-import { UserService } from "../services/userService";
-import { UserController } from "../controllers/userController";
+import { UserService } from "../services/UserService";
+import { UserController } from "../controllers/UserController";
 
 export class UserRoute {
   private readonly router: Router;
