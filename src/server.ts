@@ -23,14 +23,20 @@ app.use(express.json());
 import { DataRoute } from "./routes/DataRoute";
 import { UserRoute } from "./routes/UserRoute";
 import { ReceiptRoute } from "./routes/ReceiptRoute";
+import { LoyaltyCardRoute } from "./routes/LoyaltyCardRoute";
+import { BusinessRoute } from "./routes/BusinessRoute";
 
 const dataRoute = new DataRoute();
 const userRoute = new UserRoute();
 const receiptRoute = new ReceiptRoute();
+const loyaltyCardRoute = new LoyaltyCardRoute();
+const businessRoute = new BusinessRoute();
 
 app.use("/api", dataRoute.getRouter());
 app.use("/api/user", userRoute.getRouter());
 app.use("/api/receipt", receiptRoute.getRouter());
+app.use("/api/loyaltycard", loyaltyCardRoute.getRouter());
+app.use("/api/business", businessRoute.getRouter());
 
 /// Swagger entry
 const swaggerUi = require("swagger-ui-express");

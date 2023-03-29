@@ -11,6 +11,10 @@ const dataSchema = new mongoose.Schema({
     required: false,
     type: String,
   },
+  loyalPercent: {
+    required: false,
+    type: Number,
+  },
   address: {
     required: false,
     type: String,

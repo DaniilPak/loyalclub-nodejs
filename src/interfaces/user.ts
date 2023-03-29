@@ -1,3 +1,4 @@
+import { LoyaltyCard } from "./LoayltyCard";
 import { Receipt } from "./Receipt";
 
 export interface User {
@@ -10,4 +11,5 @@ export interface User {
   homeAddress?: string;
   paymentInfo?: string;
   orderHistory?: Receipt[];
+  loyaltyCards?: LoyaltyCard[];
 }

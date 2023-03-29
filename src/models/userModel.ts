@@ -40,6 +40,11 @@ const dataSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Receipt",
   }],
+  loyaltyCards: [{
+    required: false,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "LoyaltyCard",
+  }],
 });
 
 module.exports = mongoose.model("User", dataSchema);

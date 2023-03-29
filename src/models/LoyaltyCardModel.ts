@@ -2,7 +2,7 @@ export { dataSchema };
 
 const mongoose = require("mongoose");
 
-const dataSchema = new mongoose.Schema({
+const receiptSchema = new mongoose.Schema({
   purchaseDate: {
     required: true,
     type: Date,
@@ -31,4 +31,23 @@ const dataSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Receipt", dataSchema);
+const dataSchema = new mongoose.Schema({
+  userOwner: {
+    required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+  },
+  business: {
+    required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Business",
+  },
+  receipts: [
+    {
+      required: false,
+      type: [receiptSchema]
+    },
+  ],
+});
+
+module.exports = mongoose.model("LoyaltyCard", dataSchema);

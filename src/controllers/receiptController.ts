@@ -22,17 +22,17 @@ export class ReceiptController {
 
   async createReceipt(req: Request, res: Response): Promise<void> {
     try {
-      const { restaurantName, orderTotal, bonusAmount, workerId, clientId } =
+      const { purchaseAmount, card, clientId, workerId } =
         req.body;
-      const orderDate = new Date();
+      const purchaseDate = new Date();
 
       const receipt: Receipt = {
-        restaurantName,
-        orderDate,
-        orderTotal,
-        bonusAmount,
-        worker: workerId,
+        purchaseDate,
+        purchaseAmount,
+        card,
         client: clientId,
+        worker: workerId,
+        bonusAmount: 0,
       };
 
       const data = await this.receiptService.createReceipt(
