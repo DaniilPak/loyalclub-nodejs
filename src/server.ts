@@ -14,21 +14,30 @@ database.on("error", (error) => {
 database.once("connected", () => {
   console.log("Database Connected");
 });
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-import { UserRoute } from "./routes/dataRoute";
+/// API entry
+import { DataRoute } from "./routes/dataRoute";
+import { UserRoute } from "./routes/userRoute";
+import { ReceiptRoute } from "./routes/receiptRoute";
+
+const dataRoute = new DataRoute();
 const userRoute = new UserRoute();
+const receiptRoute = new ReceiptRoute();
 
-app.use("/api", userRoute.getRouter());
+app.use("/api", dataRoute.getRouter());
+app.use("/api/user", userRoute.getRouter());
+app.use("/api/receipt", receiptRoute.getRouter());
 
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('../swagger.json');
+/// Swagger entry
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("../swagger.json");
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-
+/// Main entry
 app.listen(3000, () => {
   console.log(`Server Started at ${3000}`);
 });

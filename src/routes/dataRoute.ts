@@ -6,7 +6,7 @@ import { DataController } from "../controllers/dataController";
 
 import { checkToken } from "../middlewares/checkToken";
 
-export class UserRoute {
+export class DataRoute {
   private readonly router: Router;
   private readonly dataController: DataController;
 

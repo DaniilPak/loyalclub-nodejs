@@ -8,13 +8,6 @@ export interface User {
   surname: string;
   email?: string;
   homeAddress?: string;
-  paymentInfo?: {
-    cardNumber: string;
-    billingAddress: string;
-  };
+  paymentInfo?: string;
   orderHistory?: Receipt[];
-  preferences?: {
-    cuisine: string;
-    dietaryRestrictions: string[];
-  };
 }
