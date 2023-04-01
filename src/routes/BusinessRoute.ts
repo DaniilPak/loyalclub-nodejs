@@ -31,6 +31,10 @@ export class BusinessRoute {
       "/worker",
       this.businessController.deleteWorker.bind(this.businessController)
     );
+    this.router.post(
+      "/update",
+      this.businessController.updateBusinessInfo.bind(this.businessController)
+    );
   }
 
   public getRouter(): Router {

@@ -56,7 +56,26 @@ export class BusinessController {
     try {
       const { workerId, businessId } = req.body;
 
-      const data = await this.businessService.deleteWorker(workerId, businessId);
+      const data = await this.businessService.deleteWorker(
+        workerId,
+        businessId
+      );
+      res.status(201).json(data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send(`Error ${error}`);
+    }
+  }
+
+  async updateBusinessInfo(req: Request, res: Response): Promise<void> {
+    try {
+      const business: Business = req.body;
+      const businessId = req.headers.businessid;
+
+      const data = await this.businessService.updateBusinessInfo(
+        business,
+        businessId
+      );
       res.status(201).json(data);
     } catch (error) {
       console.error(error);
