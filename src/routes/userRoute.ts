@@ -15,10 +15,21 @@ export class UserRoute {
   }
 
   private setupRoutes() {
-    this.router.get("/", this.userController.getUsers.bind(this.userController));
+    this.router.get(
+      "/",
+      this.userController.getUsers.bind(this.userController)
+    );
     this.router.post(
       "/",
       this.userController.createUser.bind(this.userController)
+    );
+    this.router.post(
+      "/owner",
+      this.userController.createOwner.bind(this.userController)
+    );
+    this.router.post(
+      "/worker",
+      this.userController.createWorker.bind(this.userController)
     );
   }
 
@@ -26,4 +37,3 @@ export class UserRoute {
     return this.router;
   }
 }
- 

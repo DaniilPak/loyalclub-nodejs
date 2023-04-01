@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { UserService } from "../services/UserService";
 import { User } from "../interfaces/User";
 import { Receipt } from "../interfaces/Receipt";
+import { Owner } from "../interfaces/Owner";
+import { Worker } from "../interfaces/Worker";
 
 export class UserController {
   private readonly userService: UserService;
@@ -30,4 +32,27 @@ export class UserController {
       res.status(500).send("Internal server error");
     }
   }
+
+  async createOwner(req: Request, res: Response): Promise<void> {
+    try {
+      const owner: Owner = req.body;
+      const data = await this.userService.createOwner(owner);
+      res.status(201).json(data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Internal server error");
+    } 
+  }
+
+  async createWorker(req: Request, res: Response): Promise<void> {
+    try {
+      const worker: Worker = req.body;
+      const data = await this.userService.createWorker(worker);
+      res.status(201).json(data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Internal server error");
+    } 
+  }
+
 }

@@ -27,6 +27,29 @@ export class UserService {
     }
   }
 
+  public async createOwner(owner: Owner) {
+    const userModel = new UserModel({
+      type: owner.type,
+      phoneNumber: owner.phoneNumber,
+      bonusAmount: owner.bonusAmount,
+      name: owner.name,
+      surname: owner.surname,
+      email: owner.email,
+      homeAddress: owner.homeAddress,
+      paymentInfo: owner.paymentInfo,
+      orderHistory: owner.orderHistory,
+      /// Custom options for owner
+      business: owner.business,
+    });
+
+    try {
+      await userModel.save();
+      return userModel;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   public async createWorker(worker: Worker) {
     const userModel = new UserModel({
       type: worker.type,
@@ -38,6 +61,10 @@ export class UserService {
       homeAddress: worker.homeAddress,
       paymentInfo: worker.paymentInfo,
       orderHistory: worker.orderHistory,
+      /// Custom options for worker
+      workBusiness: worker.workBusiness,
+      expirationDate: worker.expirationDate,
+      acceptedReceipts: worker.acceptedReceipts,
     });
 
     try {

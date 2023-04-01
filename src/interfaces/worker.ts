@@ -4,7 +4,7 @@ import { Business } from "./Business";
 
 export interface Worker extends User {
   type: "Worker";
-  business: Business;
+  workBusiness: Business;
   expirationDate: Date;
   acceptedReceipts: Receipt[];
 }

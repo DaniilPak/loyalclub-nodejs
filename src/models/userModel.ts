@@ -2,6 +2,35 @@ export { dataSchema };
 
 const mongoose = require("mongoose");
 
+const receiptSchema = new mongoose.Schema({
+  purchaseDate: {
+    required: true,
+    type: Date,
+  },
+  purchaseAmount: {
+    required: true,
+    type: Number,
+  },
+  card: {
+    required: true,
+    type: String,
+  },
+  client: {
+    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  worker: {
+    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  bonusAmount: {
+    required: true,
+    type: Number,
+  },
+});
+
 const dataSchema = new mongoose.Schema({
   type: {
     required: true,
@@ -45,6 +74,25 @@ const dataSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "LoyaltyCard",
   }],
+
+  /// For Owner User
+  business: {
+    required: false,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Business",
+  },
+
+  /// For Worker User
+  workBusiness: {
+    required: false,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Business",
+  },
+  expirationDate: {
+    required: false,
+    type: Date
+  },
+  acceptedReceipts: [receiptSchema],
 });
 
 module.exports = mongoose.model("User", dataSchema);
