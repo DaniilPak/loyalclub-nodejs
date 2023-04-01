@@ -3,6 +3,7 @@ export {};
 import { Router } from "express";
 import { BusinessController } from "../controllers/BusinessController";
 import { BusinessService } from "../services/BusinessService";
+import { checkBusinessOwner } from "../middlewares/checkBusinessOwner";
 
 export class BusinessRoute {
   private readonly router: Router;
@@ -33,6 +34,7 @@ export class BusinessRoute {
     );
     this.router.post(
       "/update",
+      checkBusinessOwner,
       this.businessController.updateBusinessInfo.bind(this.businessController)
     );
   }
