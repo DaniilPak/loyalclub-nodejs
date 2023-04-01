@@ -18,12 +18,12 @@ const receiptSchema = new mongoose.Schema({
   client: {
     required: true,
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
   },
   worker: {
     required: true,
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
   },
   bonusAmount: {
     required: true,
@@ -34,18 +34,18 @@ const receiptSchema = new mongoose.Schema({
 const dataSchema = new mongoose.Schema({
   userOwner: {
     required: true,
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
   business: {
     required: true,
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Business",
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Business",
   },
   receipts: [
     {
       required: false,
-      type: [receiptSchema]
+      type: [receiptSchema],
     },
   ],
 });

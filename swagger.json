@@ -24,23 +24,404 @@
           }
         }
       }
+    },
+    "/api/business": {
+      "get": {
+        "summary": "Get all businesses",
+        "responses": {
+          "200": {
+            "description": "Returns an array of businesses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Business"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new business",
+        "requestBody": {
+          "description": "The business object to be created",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Business"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Returns the created business object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Business"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/business/worker": {
+      "post": {
+        "summary": "Add a worker to a business",
+        "requestBody": {
+          "description": "The worker object to be added",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the updated business object with the added worker",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Business"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a worker from a business",
+        "requestBody": {
+          "description": "The worker object to be deleted",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the updated business object without the deleted worker",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Business"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/loyaltycard": {
+      "get": {
+        "tags": [
+          "LoyaltyCards"
+        ],
+        "summary": "Get all loyalty cards",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/LoyaltyCard"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "LoyaltyCards"
+        ],
+        "summary": "Create a new loyalty card",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/LoyaltyCard"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/LoyaltyCard"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/receipt": {
+      "get": {
+        "tags": ["Receipt"],
+        "summary": "Get all receipts",
+        "operationId": "getReceipts",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Receipt"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Receipt"],
+        "summary": "Create a new receipt",
+        "operationId": "createReceipt",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Receipt"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Receipt"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
     }
+    
+        
   },
   "definitions": {
     "User": {
       "type": "object",
+      "required": [
+        "type",
+        "phoneNumber",
+        "bonusAmount",
+        "name",
+        "surname"
+      ],
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
+        "type": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "bonusAmount": {
+          "type": "number"
         },
         "name": {
           "type": "string"
         },
+        "surname": {
+          "type": "string"
+        },
         "email": {
           "type": "string"
+        },
+        "homeAddress": {
+          "type": "string"
+        },
+        "paymentInfo": {
+          "type": "string"
+        },
+        "orderHistory": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "loyaltyCards": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
         }
       }
+    },
+    "Business": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the business",
+          "example": "Acme Corp"
+        },
+        "pictureUrl": {
+          "type": "string",
+          "description": "The URL of the business's picture",
+          "example": "https://example.com/acme.jpg"
+        },
+        "loyalPercent": {
+          "type": "number",
+          "description": "The percentage of loyalty points earned per purchase",
+          "example": 5.0
+        },
+        "address": {
+          "type": "string",
+          "description": "The address of the business",
+          "example": "123 Main St, Anytown USA"
+        },
+        "workers": {
+          "type": "array",
+          "description": "The IDs of the workers assigned to the business",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        }
+      }
+    },
+    "LoyaltyCard": {
+      "type": "object",
+      "properties": {
+        "userOwner": {
+          "type": "string",
+          "description": "The ID of the user who owns the card.",
+          "format": "uuid"
+        },
+        "business": {
+          "type": "string",
+          "description": "The ID of the business for which the card is valid.",
+          "format": "uuid"
+        },
+        "receipts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "description": "The date of the purchase.",
+                "format": "date-time"
+              },
+              "client": {
+                "type": "string",
+                "description": "The ID of the client who made the purchase.",
+                "format": "uuid"
+              },
+              "worker": {
+                "type": "string",
+                "description": "The ID of the worker who accepted the purchase.",
+                "format": "uuid"
+              },
+              "amount": {
+                "type": "number",
+                "description": "The amount of the purchase."
+              },
+              "bonusAmount": {
+                "type": "number",
+                "description": "The amount of bonus points earned from the purchase."
+              }
+            },
+            "required": [
+              "date",
+              "client",
+              "worker",
+              "amount",
+              "bonusAmount"
+            ]
+          }
+        }
+      },
+      "required": [
+        "userOwner",
+        "business",
+        "receipts"
+      ]
+    },
+    "Receipt": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "pictureUrl": {
+          "type": "string"
+        },
+        "loyalPercent": {
+          "type": "number"
+        },
+        "address": {
+          "type": "string"
+        },
+        "workers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "userOwner": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "business": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "receipts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Receipt"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "userOwner",
+        "business",
+        "receipts"
+      ]
     }
+    
   }
 }

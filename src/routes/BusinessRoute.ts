@@ -23,6 +23,14 @@ export class BusinessRoute {
       "/",
       this.businessController.createBusiness.bind(this.businessController)
     );
+    this.router.post(
+      "/worker",
+      this.businessController.addWorker.bind(this.businessController)
+    );
+    this.router.delete(
+      "/worker",
+      this.businessController.deleteWorker.bind(this.businessController)
+    );
   }
 
   public getRouter(): Router {

@@ -17,3 +17,5 @@
 ### Routes: Define the HTTP endpoints that your application will respond to
 
 ### Configurations: Store application settings or environment variables
+
+MERN Stack (MongoDB, Express, React, Node.js): This is a popular full-stack JavaScript-based web development framework that is widely used for building scalable and robust web applications.

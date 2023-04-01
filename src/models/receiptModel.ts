@@ -18,12 +18,12 @@ const dataSchema = new mongoose.Schema({
   client: {
     required: true,
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
   },
   worker: {
     required: true,
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
   },
   bonusAmount: {
     required: true,

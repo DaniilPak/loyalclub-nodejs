@@ -27,27 +27,6 @@ export class UserService {
     }
   }
 
-  public async createBusiness(owner: Owner) {
-    const userModel = new UserModel({
-      type: owner.type,
-      phoneNumber: owner.phoneNumber,
-      bonusAmount: owner.bonusAmount,
-      name: owner.name,
-      surname: owner.surname,
-      email: owner.email,
-      homeAddress: owner.homeAddress,
-      paymentInfo: owner.paymentInfo,
-      orderHistory: owner.orderHistory,
-    });
-
-    try {
-      await userModel.save();
-      return userModel;
-    } catch (error) {
-      throw error;
-    }
-  }
-
   public async createWorker(worker: Worker) {
     const userModel = new UserModel({
       type: worker.type,
