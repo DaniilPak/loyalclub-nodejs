@@ -73,4 +73,13 @@ export class BusinessService {
       throw error;
     }
   }
+
+  public async getBusinessById(businessId: string) {
+    try {
+      const data = await BusinessModel.findById(businessId);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

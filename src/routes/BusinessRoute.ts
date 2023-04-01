@@ -3,7 +3,8 @@ export {};
 import { Router } from "express";
 import { BusinessController } from "../controllers/BusinessController";
 import { BusinessService } from "../services/BusinessService";
-import { checkBusinessOwner } from "../middlewares/checkBusinessOwner";
+import { checkToken } from "../middlewares/checkToken";
+import { UserService } from "../services/UserService";
 
 export class BusinessRoute {
   private readonly router: Router;
@@ -11,7 +12,7 @@ export class BusinessRoute {
 
   constructor() {
     this.router = Router();
-    this.businessController = new BusinessController(new BusinessService());
+    this.businessController = new BusinessController(new BusinessService(), new UserService());
     this.setupRoutes();
   }
 
@@ -34,7 +35,7 @@ export class BusinessRoute {
     );
     this.router.post(
       "/update",
-      checkBusinessOwner,
+      checkToken,
       this.businessController.updateBusinessInfo.bind(this.businessController)
     );
   }

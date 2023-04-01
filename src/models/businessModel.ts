@@ -24,6 +24,11 @@ const dataSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   }],
+  owner: {
+    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  }
 });
 
 module.exports = mongoose.model("Business", dataSchema);

@@ -2,6 +2,7 @@ export {};
 
 import { Router } from "express";
 import { AuthController } from "../controllers/AuthController";
+import { UserService } from "../services/UserService";
 
 export class AuthRoute {
   private readonly router: Router;
@@ -9,13 +10,13 @@ export class AuthRoute {
 
   constructor() {
     this.router = Router();
-    this.authController = new AuthController();
+    this.authController = new AuthController(new UserService);
     this.setupRoutes();
   }
 
   private setupRoutes() {
     this.router.post(
-      "/auth",
+      "/",
       this.authController.makeAuth.bind(this.authController)
     );
   }

@@ -22,10 +22,10 @@ export class DataRoute {
       "/",
       this.dataController.createData.bind(this.dataController)
     );
-    this.router.post(
-      "/auth",
-      this.dataController.makeAuth.bind(this.dataController)
-    );
+    // this.router.post(
+    //   "/auth",
+    //   this.dataController.makeAuth.bind(this.dataController)
+    // );
     this.router.get(
       "/protected",
       checkToken,

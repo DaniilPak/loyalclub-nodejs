@@ -86,4 +86,22 @@ export class UserService {
       throw error;
     }
   }
+
+  public async getUserById(userId: string) {
+    try {
+      const data = await UserModel.findById(userId);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async getUserByPhoneNumber(userPhoneNumber: string) {
+    try {
+      const data = await UserModel.findOne({ phoneNumber: userPhoneNumber });
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
