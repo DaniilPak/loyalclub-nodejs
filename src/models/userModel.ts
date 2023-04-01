@@ -1,6 +1,7 @@
 export { dataSchema };
 
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const receiptSchema = new mongoose.Schema({
   purchaseDate: {
@@ -40,6 +41,10 @@ const dataSchema = new mongoose.Schema({
     required: true,
     type: String,
   },
+  password: {
+    type: String,
+    required: true,
+  },
   bonusAmount: {
     required: true,
     type: Number,
@@ -64,16 +69,20 @@ const dataSchema = new mongoose.Schema({
     required: false,
     type: String,
   },
-  orderHistory: [{
-    required: false,
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Receipt",
-  }],
-  loyaltyCards: [{
-    required: false,
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "LoyaltyCard",
-  }],
+  orderHistory: [
+    {
+      required: false,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Receipt",
+    },
+  ],
+  loyaltyCards: [
+    {
+      required: false,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "LoyaltyCard",
+    },
+  ],
 
   /// For Owner User
   business: {
@@ -90,9 +99,27 @@ const dataSchema = new mongoose.Schema({
   },
   expirationDate: {
     required: false,
-    type: Date
+    type: Date,
   },
   acceptedReceipts: [receiptSchema],
+});
+
+dataSchema.pre("save", async function (next) {
+  const user = this;
+
+  // Hash the password if it has been modified or is new
+  if (!user.isModified("password")) {
+    return next();
+  }
+
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(user.password, salt);
+    user.password = hash;
+    next();
+  } catch (error) {
+    return next(error);
+  }
 });
 
 module.exports = mongoose.model("User", dataSchema);

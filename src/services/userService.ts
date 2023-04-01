@@ -10,6 +10,7 @@ export class UserService {
     const userModel = new UserModel({
       type: user.type,
       phoneNumber: user.phoneNumber,
+      password: user.password,
       bonusAmount: user.bonusAmount,
       name: user.name,
       surname: user.surname,
@@ -31,6 +32,7 @@ export class UserService {
     const userModel = new UserModel({
       type: owner.type,
       phoneNumber: owner.phoneNumber,
+      password: owner.password,
       bonusAmount: owner.bonusAmount,
       name: owner.name,
       surname: owner.surname,
@@ -54,6 +56,7 @@ export class UserService {
     const userModel = new UserModel({
       type: worker.type,
       phoneNumber: worker.phoneNumber,
+      password: worker.password,
       bonusAmount: worker.bonusAmount,
       name: worker.name,
       surname: worker.surname,

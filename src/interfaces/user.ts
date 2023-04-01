@@ -4,6 +4,7 @@ import { Receipt } from "./Receipt";
 export interface User {
   type: "Client" | "Owner" | "Worker";
   phoneNumber: string;
+  password: string;
   bonusAmount: number;
   name: string;
   surname: string;
