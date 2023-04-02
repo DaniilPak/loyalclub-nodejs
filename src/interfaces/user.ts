@@ -5,7 +5,6 @@ export interface User {
   type: "Client" | "Owner" | "Worker";
   phoneNumber: string;
   password: string;
-  bonusAmount: number;
   name: string;
   surname: string;
   email?: string;

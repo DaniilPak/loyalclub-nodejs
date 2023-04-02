@@ -8,9 +8,233 @@
   "basePath": "/",
   "schemes": ["http"],
   "paths": {
-    "/users": {
+    "/api/user": {
       "get": {
         "description": "Returns a list of users",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "A list of users",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Creates a new user, with type Client | Owner | Worker",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Client object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "Client"
+                },
+                "phoneNumber": {
+                  "type": "string",
+                  "example": "77057773377"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Daniil"
+                },
+                "surname": {
+                  "type": "string",
+                  "example": "Pak"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "@gmail.com"
+                },
+                "homeAddress": {
+                  "type": "string",
+                  "example": "homeAddress"
+                },
+                "paymentInfo": {
+                  "type": "string",
+                  "example": "Kaspi"
+                },
+                "orderHistory": {
+                  "type": "array",
+                  "items": {}
+                },
+                "loyaltyCards": {
+                  "type": "array",
+                  "items": {}
+                }
+              }
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created user",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/owner": {
+      "post": {
+        "description": "Returns a list of users",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Creates an owner with business provided (id)",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "Client"
+                },
+                "phoneNumber": {
+                  "type": "string",
+                  "example": "77057773377"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Daniil"
+                },
+                "surname": {
+                  "type": "string",
+                  "example": "Pak"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "@gmail.com"
+                },
+                "homeAddress": {
+                  "type": "string",
+                  "example": "homeAddress"
+                },
+                "paymentInfo": {
+                  "type": "string",
+                  "example": "Kaspi"
+                },
+                "orderHistory": {
+                  "type": "array",
+                  "items": {}
+                },
+                "loyaltyCards": {
+                  "type": "array",
+                  "items": {}
+                },
+                "business": {
+                  "type": "string",
+                  "example": "6424638f5e0484cbd121f1d8"
+                }
+              }
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "A list of users",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/worker": {
+      "post": {
+        "description": "Returns a list of users",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Creates an owner with business provided (id)",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "Client"
+                },
+                "phoneNumber": {
+                  "type": "string",
+                  "example": "77057773377"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Daniil"
+                },
+                "surname": {
+                  "type": "string",
+                  "example": "Pak"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "@gmail.com"
+                },
+                "homeAddress": {
+                  "type": "string",
+                  "example": "homeAddress"
+                },
+                "paymentInfo": {
+                  "type": "string",
+                  "example": "Kaspi"
+                },
+                "orderHistory": {
+                  "type": "array",
+                  "items": {}
+                },
+                "loyaltyCards": {
+                  "type": "array",
+                  "items": {}
+                },
+                "workBusiness": {
+                  "type": "string",
+                  "items": {}
+                },
+                "expirationDate": {
+                  "type": "string",
+                  "items": {}
+                },
+                "acceptedReceipts": {
+                  "type": "array",
+                  "items": {}
+                }
+              }
+            }
+          }
+        ],
         "produces": ["application/json"],
         "responses": {
           "200": {
@@ -45,26 +269,56 @@
         }
       },
       "post": {
-        "summary": "Create a new business",
-        "requestBody": {
-          "description": "The business object to be created",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/Business"
+        "description": "Returns a list of users",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Creates an owner with business provided (id)",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "K.chicken"
+                },
+                "pictureUrl": {
+                  "type": "string",
+                  "example": "url"
+                },
+                "loyalPercent": {
+                  "type": "number",
+                  "example": 3
+                },
+                "address": {
+                  "type": "string",
+                  "example": "homeAddress"
+                },
+                "workers": {
+                  "type": "array",
+                  "items": {}
+                },
+                "owner": {
+                  "type": "string",
+                  "example": "_id"
+                },
+                "receipts": {
+                  "type": "array",
+                  "items": {}
+                }
               }
             }
           }
-        },
+        ],
+        "produces": ["application/json"],
         "responses": {
-          "201": {
-            "description": "Returns the created business object",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/Business"
-                }
+          "200": {
+            "description": "A list of users",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
               }
             }
           }
@@ -73,32 +327,63 @@
     },
     "/api/business/worker": {
       "post": {
-        "summary": "Add a worker to a business",
-        "requestBody": {
-          "description": "The worker object to be added",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/User"
+        "description": "Add worker to a business",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Creates an owner with business provided (id)",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "workerId": {
+                  "type": "string",
+                  "example": "641f14c913fb74346d88a868"
+                },
+                "businessId": {
+                  "type": "string",
+                  "example": "6424638f5e0484cbd121f1d8"
+                }
               }
             }
           }
-        },
+        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "Returns the updated business object with the added worker",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/Business"
-                }
+            "description": "A list of users",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
               }
             }
           }
         }
       },
       "delete": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Creates an owner with business provided (id)",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "workerId": {
+                  "type": "string",
+                  "example": "641f14c913fb74346d88a868"
+                },
+                "businessId": {
+                  "type": "string",
+                  "example": "6424638f5e0484cbd121f1d8"
+                }
+              }
+            }
+          }
+        ],
         "summary": "Delete a worker from a business",
         "requestBody": {
           "description": "The worker object to be deleted",
@@ -127,9 +412,7 @@
     },
     "/api/loyaltycard": {
       "get": {
-        "tags": [
-          "LoyaltyCards"
-        ],
+        "tags": ["LoyaltyCards"],
         "summary": "Get all loyalty cards",
         "responses": {
           "200": {
@@ -148,8 +431,31 @@
         }
       },
       "post": {
-        "tags": [
-          "LoyaltyCards"
+        "tags": ["LoyaltyCards"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Creates an owner with business provided (id)",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userOwner": {
+                  "type": "string",
+                  "example": "641f14c913fb74346d88a868"
+                },
+                "business": {
+                  "type": "string",
+                  "example": "6424638f5e0484cbd121f1d8"
+                },
+                "receipts": {
+                  "type": "array",
+                  "items": {}
+                }
+              }
+            }
+          }
         ],
         "summary": "Create a new loyalty card",
         "requestBody": {
@@ -234,19 +540,11 @@
         }
       }
     }
-    
-        
   },
   "definitions": {
     "User": {
       "type": "object",
-      "required": [
-        "type",
-        "phoneNumber",
-        "bonusAmount",
-        "name",
-        "surname"
-      ],
+      "required": ["type", "phoneNumber", "bonusAmount", "name", "surname"],
       "properties": {
         "type": {
           "type": "string"
@@ -362,21 +660,11 @@
                 "description": "The amount of bonus points earned from the purchase."
               }
             },
-            "required": [
-              "date",
-              "client",
-              "worker",
-              "amount",
-              "bonusAmount"
-            ]
+            "required": ["date", "client", "worker", "amount", "bonusAmount"]
           }
         }
       },
-      "required": [
-        "userOwner",
-        "business",
-        "receipts"
-      ]
+      "required": ["userOwner", "business", "receipts"]
     },
     "Receipt": {
       "type": "object",
@@ -415,13 +703,7 @@
           }
         }
       },
-      "required": [
-        "name",
-        "userOwner",
-        "business",
-        "receipts"
-      ]
+      "required": ["name", "userOwner", "business", "receipts"]
     }
-    
   }
 }

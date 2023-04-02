@@ -10,6 +10,7 @@ export class BusinessService {
       loyalPercent: business.loyalPercent,
       address: business.address,
       workers: business.workers,
+      owner: business.owner,
     });
 
     try {
