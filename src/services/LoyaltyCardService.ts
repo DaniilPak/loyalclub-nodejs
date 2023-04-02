@@ -1,16 +1,14 @@
-const Receipt = require("../models/receiptModel");
-const UserModel = require("../models/userModel");
-const LoyaltyCard = require("../models/LoyaltyCardModel");
+const LoyaltyCardModel = require("../models/LoyaltyCardModel");
 
-import { Receipt } from "../interfaces/Receipt";
 import { LoyaltyCard } from "../interfaces/LoayltyCard";
+import { User } from "../interfaces/User";
 
 export class LoyaltyCardService {
   public async createLoyaltyCard(loyaltyCard: LoyaltyCard) {
-    const data = new LoyaltyCard({
-        userOwner: loyaltyCard.userOwner,
-        business: loyaltyCard.business,
-        receipts: loyaltyCard.receipts,
+    const data = new LoyaltyCardModel({
+      userOwner: loyaltyCard.userOwner,
+      business: loyaltyCard.business,
+      receipts: loyaltyCard.receipts,
     });
 
     try {
@@ -21,9 +19,9 @@ export class LoyaltyCardService {
     }
   }
 
-  public async getLoyaltyCardByUserId(userId: string) {
+  public async getLoyaltyCardByUserId(userId: User | string) {
     try {
-      const data = await LoyaltyCard.findById(userId);
+      const data = await LoyaltyCardModel.findOne({ userOwner: userId });
       return data;
     } catch (error) {
       throw error;
@@ -32,8 +30,20 @@ export class LoyaltyCardService {
 
   public async getAllLoyaltyCards() {
     try {
-      const data = await LoyaltyCard.find();
+      const data = await LoyaltyCardModel.find();
       return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async addReceiptToCard(loyaltyCardId: string, receipt: any) {
+    const loyaltyCard = await LoyaltyCardModel.findById(loyaltyCardId);
+
+    try {
+      loyaltyCard.receipts.push(receipt);
+      loyaltyCard.save();
+      return loyaltyCard;
     } catch (error) {
       throw error;
     }

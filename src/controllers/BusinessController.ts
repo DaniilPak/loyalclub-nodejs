@@ -28,7 +28,7 @@ export class BusinessController {
 
   async createBusiness(req: Request, res: Response): Promise<void> {
     try {
-      const { name, pictureUrl, loyalPercent, address, workers, owner } =
+      const { name, pictureUrl, loyalPercent, address, workers, owner, receipts } =
         req.body;
 
       const business: Business = {
@@ -38,6 +38,7 @@ export class BusinessController {
         address,
         workers,
         owner,
+        receipts
       };
 
       const data = await this.businessService.createBusiness(business);

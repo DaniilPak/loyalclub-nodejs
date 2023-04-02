@@ -104,4 +104,15 @@ export class UserService {
       throw error;
     }
   }
+
+  public async addHistory(userId: Worker, data) {
+    const userModel = await UserModel.findById(userId);
+
+    try {
+      userModel.orderHistory.push(data);
+      userModel.save();
+    } catch (error) {
+      throw error;
+    }
+  }
 }

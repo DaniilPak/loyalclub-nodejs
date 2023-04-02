@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { ReceiptService } from "../services/ReceiptService";
 import { Receipt } from "../interfaces/Receipt";
-const UserModel = require("../models/userModel");
 
 export class ReceiptController {
   private readonly receiptService: ReceiptService;

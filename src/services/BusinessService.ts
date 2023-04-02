@@ -82,4 +82,17 @@ export class BusinessService {
       throw error;
     }
   }
+
+  public async addReceiptToBusiness(businessId: Business | string, receipt) {
+    try {
+      const business = await BusinessModel.findById(businessId);
+
+      business.receipts.push(receipt);
+      business.save();
+
+      return business;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

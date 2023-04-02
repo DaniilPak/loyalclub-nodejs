@@ -9,4 +9,5 @@ export interface Business {
   address: string;
   workers: Worker[];
   owner: Owner;
+  receipts: Receipt[];
 }
