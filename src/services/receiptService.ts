@@ -34,6 +34,7 @@ export class ReceiptService {
     try {
       this.userService.addHistory(receipt.worker, data);
       this.loyaltyCardService.addReceiptToCard(receipt.card, data);
+      this.loyaltyCardService.updateBonusAmount(receipt.card, receipt.purchaseAmount);
       const loyaltyCard = await this.loyaltyCardService.getLoyaltyCardByUserId(receipt.client)
       this.businessService.addReceiptToBusiness(loyaltyCard.business, data);
 

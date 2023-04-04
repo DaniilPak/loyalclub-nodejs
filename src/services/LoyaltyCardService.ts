@@ -48,4 +48,26 @@ export class LoyaltyCardService {
       throw error;
     }
   }
+
+  public async updateBonusAmount(loyaltyCardId: string, amount: number) {
+    const loyaltyCardToUpdate = await LoyaltyCardModel.findById(loyaltyCardId);
+    const currentVersion = loyaltyCardToUpdate.__v;
+    if (amount >= 0) {
+      loyaltyCardToUpdate.bonusAmount += amount;
+    } else {
+      loyaltyCardToUpdate.bonusAmount -= -amount;
+    }
+
+    try {
+      const updatedDoc = await LoyaltyCardModel.updateOne(
+        { _id: loyaltyCardId, __v: currentVersion },
+        loyaltyCardToUpdate
+      );
+      return updatedDoc;
+      // Successfully updated document
+    } catch (error) {
+      // Version conflict occurred
+      throw error;
+    }
+  }
 }

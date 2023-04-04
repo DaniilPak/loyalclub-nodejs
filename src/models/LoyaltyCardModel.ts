@@ -48,6 +48,10 @@ const dataSchema = new mongoose.Schema({
       type: [receiptSchema],
     },
   ],
+  bonusAmount: {
+    required: true,
+    type: Number,
+  }
 });
 
 module.exports = mongoose.model("LoyaltyCard", dataSchema);

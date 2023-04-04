@@ -9,11 +9,14 @@ export class ReceiptController {
   private readonly loyaltyCardService: LoyaltyCardService;
   private readonly businessService: BusinessService;
 
-  constructor(receiptService: ReceiptService, loyaltyCardService: LoyaltyCardService, businessService: BusinessService) {
+  constructor(
+    receiptService: ReceiptService,
+    loyaltyCardService: LoyaltyCardService,
+    businessService: BusinessService
+  ) {
     this.receiptService = receiptService;
     this.loyaltyCardService = loyaltyCardService;
     this.businessService = businessService;
-    
   }
 
   async getReceipts(req: Request, res: Response): Promise<void> {
@@ -40,11 +43,15 @@ export class ReceiptController {
         bonusAmount: 0,
       };
 
-      const currentLoyaltyCard = await this.loyaltyCardService.getLoyaltyCardByUserId(clientId);
-      const currentBusiness = await this.businessService.getBusinessById(currentLoyaltyCard.business);
+      const currentLoyaltyCard =
+        await this.loyaltyCardService.getLoyaltyCardByUserId(clientId);
+      const currentBusiness = await this.businessService.getBusinessById(
+        currentLoyaltyCard.business
+      );
       const isOwnerOfBusiness = workerId == currentBusiness.owner;
+      const isWorkerOfBusiness = currentBusiness.workers.includes(workerId);
 
-      if (isOwnerOfBusiness) {
+      if (isOwnerOfBusiness || isWorkerOfBusiness) {
         const data = await this.receiptService.createReceipt(receipt);
         res.status(201).json(data);
       } else {
