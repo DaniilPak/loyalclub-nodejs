@@ -18,7 +18,9 @@ export class ReceiptRoute {
         new UserService(),
         new LoyaltyCardService(),
         new BusinessService()
-      )
+      ),
+      new LoyaltyCardService(),
+      new BusinessService()
     );
     this.setupRoutes();
   }
