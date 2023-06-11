@@ -42,6 +42,10 @@ const dataSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Business",
   },
+  businessName: {
+    required: true,
+    type: String,
+  },
   receipts: [
     {
       required: false,

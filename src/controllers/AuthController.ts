@@ -15,14 +15,19 @@ export class AuthController {
   async makeAuth(req: Request, res: Response) {
     const { phoneNumber, password } = req.body;
 
-    const userData = await this.userService.getUserByPhoneNumber(phoneNumber);
-    const isPasswordCorrect = await bcrypt.compare(password, userData.password);
+    try {
+      const userData = await this.userService.getUserByPhoneNumber(phoneNumber);
+      const isPasswordCorrect = await bcrypt.compare(password, userData.password);
 
-    if (isPasswordCorrect) {
-      const token = jwt.sign({ _id: userData._id }, "secret", { expiresIn: "1h" });
-      res.json({ token });
-    } else {
-      res.status(401).json({ message: "Invalid credentials" });
+      if (isPasswordCorrect) {
+        const token = jwt.sign({ _id: userData._id }, "secret", { expiresIn: "1h" });
+        res.json({ token, userData });
+      } else {
+        res.status(401).json({ message: "Invalid credentials" });
+      }
+    } catch (err) {
+      console.log(err);
     }
+
   }
 }

@@ -1,8 +1,9 @@
-export {};
+export { };
 
 import { Router } from "express";
 import { LoyaltyCardController } from "../controllers/LoyaltyCardController";
 import { LoyaltyCardService } from "../services/LoyaltyCardService";
+import { BusinessService } from "../services/BusinessService";
 
 export class LoyaltyCardRoute {
   private readonly router: Router;
@@ -10,7 +11,7 @@ export class LoyaltyCardRoute {
 
   constructor() {
     this.router = Router();
-    this.loyaltyCardController = new LoyaltyCardController(new LoyaltyCardService());
+    this.loyaltyCardController = new LoyaltyCardController(new LoyaltyCardService(), new BusinessService());
     this.setupRoutes();
   }
 
@@ -20,10 +21,13 @@ export class LoyaltyCardRoute {
       "/",
       this.loyaltyCardController.createLoyaltyCard.bind(this.loyaltyCardController)
     );
+    this.router.post(
+      "/getloyaltycardbyid",
+      this.loyaltyCardController.getLoyaltyCardById.bind(this.loyaltyCardController)
+    );
   }
 
   public getRouter(): Router {
     return this.router;
   }
 }
- 

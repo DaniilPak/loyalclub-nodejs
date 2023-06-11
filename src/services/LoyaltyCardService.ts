@@ -9,10 +9,21 @@ export class LoyaltyCardService {
       userOwner: loyaltyCard.userOwner,
       business: loyaltyCard.business,
       receipts: loyaltyCard.receipts,
+      businessName: loyaltyCard.businessName,
+      bonusAmount: 0,
     });
 
     try {
       await data.save();
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async getLoyaltyCardById(loyaltyCardId: string) {
+    try {
+      const data = await LoyaltyCardModel.findOne({ _id: loyaltyCardId });
       return data;
     } catch (error) {
       throw error;

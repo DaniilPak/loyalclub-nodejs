@@ -6,4 +6,5 @@ export interface LoyaltyCard {
   userOwner: User;
   business: Business;
   receipts: Receipt[];
+  businessName: string;
 }
