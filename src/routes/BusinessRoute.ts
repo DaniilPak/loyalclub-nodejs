@@ -1,4 +1,4 @@
-export {};
+export { };
 
 import { Router } from "express";
 import { BusinessController } from "../controllers/BusinessController";
@@ -37,6 +37,10 @@ export class BusinessRoute {
       "/update",
       checkToken,
       this.businessController.updateBusinessInfo.bind(this.businessController)
+    );
+    this.router.post(
+      "/getbusinessbyid",
+      this.businessController.getBusinessById.bind(this.businessController)
     );
   }
 

@@ -8,4 +8,5 @@ export interface Receipt {
   client: User;
   worker: Worker;
   bonusAmount: number;
+  minusBonus: number;
 }

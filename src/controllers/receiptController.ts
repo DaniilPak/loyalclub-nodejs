@@ -3,20 +3,41 @@ import { ReceiptService } from "../services/ReceiptService";
 import { Receipt } from "../interfaces/Receipt";
 import { LoyaltyCardService } from "../services/LoyaltyCardService";
 import { BusinessService } from "../services/BusinessService";
+import { UserService } from "../services/UserService";
 
 export class ReceiptController {
   private readonly receiptService: ReceiptService;
   private readonly loyaltyCardService: LoyaltyCardService;
   private readonly businessService: BusinessService;
+  private readonly userService: UserService;
 
   constructor(
     receiptService: ReceiptService,
     loyaltyCardService: LoyaltyCardService,
-    businessService: BusinessService
+    businessService: BusinessService,
+    userService: UserService,
   ) {
     this.receiptService = receiptService;
     this.loyaltyCardService = loyaltyCardService;
     this.businessService = businessService;
+    this.userService = userService;
+  }
+
+  async getDetailedReceipt(req: Request, res: Response): Promise<void> {
+    try {
+      const { receiptId } = req.body;
+
+      const receiptObject = await this.receiptService.getReceiptById(receiptId);
+      // Get client object by receipt cliend id
+      const clientObject = await this.userService.getUserById(receiptObject.client);
+      // Get worker object 
+      const workerObject = await this.userService.getUserById(receiptObject.worker);
+
+      res.status(200).json({ receiptObject, clientObject, workerObject });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Internal server error");
+    }
   }
 
   async getReceipts(req: Request, res: Response): Promise<void> {
@@ -31,7 +52,7 @@ export class ReceiptController {
 
   async createReceipt(req: Request, res: Response): Promise<void> {
     try {
-      const { purchaseAmount, card, clientId, workerId } = req.body;
+      const { purchaseAmount, card, clientId, workerId, bonusAmount, minusBonus } = req.body;
       const purchaseDate = new Date();
 
       const receipt: Receipt = {
@@ -40,7 +61,8 @@ export class ReceiptController {
         card,
         client: clientId,
         worker: workerId,
-        bonusAmount: 0,
+        bonusAmount: bonusAmount,
+        minusBonus: minusBonus,
       };
 
       const currentLoyaltyCard =

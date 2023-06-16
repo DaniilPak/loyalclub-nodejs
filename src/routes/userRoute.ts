@@ -1,4 +1,4 @@
-export {};
+export { };
 
 import { Router } from "express";
 import { UserService } from "../services/UserService";
@@ -22,6 +22,10 @@ export class UserRoute {
     this.router.post(
       "/",
       this.userController.createUser.bind(this.userController)
+    );
+    this.router.post(
+      "/getuserbyid",
+      this.userController.getUserById.bind(this.userController)
     );
     this.router.post(
       "/owner",

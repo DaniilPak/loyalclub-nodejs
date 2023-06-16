@@ -44,6 +44,10 @@ const dataSchema = new mongoose.Schema({
     required: false,
     type: Number,
   },
+  currencySign: {
+    required: false,
+    type: String,
+  },
   address: {
     required: false,
     type: String,

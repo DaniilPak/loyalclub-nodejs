@@ -12,6 +12,18 @@ export class UserController {
     this.userService = userService;
   }
 
+  async getUserById(req: Request, res: Response): Promise<void> {
+    try {
+      const { userId } = req.body;
+
+      const data = await this.userService.getUserById(userId);
+      res.status(200).json(data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Internal server error");
+    }
+  }
+
   async getUsers(req: Request, res: Response): Promise<void> {
     try {
       const data = await this.userService.getAllUsers();
@@ -41,7 +53,7 @@ export class UserController {
     } catch (err) {
       console.error(err);
       res.status(500).send("Internal server error");
-    } 
+    }
   }
 
   async createWorker(req: Request, res: Response): Promise<void> {
@@ -52,7 +64,7 @@ export class UserController {
     } catch (err) {
       console.error(err);
       res.status(500).send("Internal server error");
-    } 
+    }
   }
 
 }

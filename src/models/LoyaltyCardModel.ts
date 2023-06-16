@@ -43,7 +43,7 @@ const dataSchema = new mongoose.Schema({
     ref: "Business",
   },
   businessName: {
-    required: true,
+    required: false,
     type: String,
   },
   receipts: [
@@ -56,6 +56,10 @@ const dataSchema = new mongoose.Schema({
     required: true,
     type: Number,
   }
-});
+},
+  {
+    versionKey: '__v' // Enable versioning with '__v' as the version key
+  }
+);
 
 module.exports = mongoose.model("LoyaltyCard", dataSchema);

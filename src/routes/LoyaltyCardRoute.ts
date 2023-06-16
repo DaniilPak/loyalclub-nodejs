@@ -25,6 +25,10 @@ export class LoyaltyCardRoute {
       "/getloyaltycardbyid",
       this.loyaltyCardController.getLoyaltyCardById.bind(this.loyaltyCardController)
     );
+    this.router.post(
+      "/getorcreatecard",
+      this.loyaltyCardController.getOrCreateLoyaltyCard.bind(this.loyaltyCardController)
+    );
   }
 
   public getRouter(): Router {

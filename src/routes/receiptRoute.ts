@@ -1,4 +1,4 @@
-export {};
+export { };
 
 import { Router } from "express";
 import { ReceiptController } from "../controllers/ReceiptController";
@@ -20,7 +20,8 @@ export class ReceiptRoute {
         new BusinessService()
       ),
       new LoyaltyCardService(),
-      new BusinessService()
+      new BusinessService(),
+      new UserService(),
     );
     this.setupRoutes();
   }
@@ -33,6 +34,10 @@ export class ReceiptRoute {
     this.router.post(
       "/",
       this.receiptController.createReceipt.bind(this.receiptController)
+    );
+    this.router.post(
+      "/getdetailedreceipt",
+      this.receiptController.getDetailedReceipt.bind(this.receiptController)
     );
   }
 

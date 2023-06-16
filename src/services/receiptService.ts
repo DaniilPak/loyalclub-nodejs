@@ -29,12 +29,13 @@ export class ReceiptService {
       client: receipt.client,
       worker: receipt.worker,
       bonusAmount: receipt.bonusAmount,
+      minusBonus: receipt.minusBonus,
     });
 
     try {
       this.userService.addHistory(receipt.worker, data);
       this.loyaltyCardService.addReceiptToCard(receipt.card, data);
-      this.loyaltyCardService.updateBonusAmount(receipt.card, receipt.purchaseAmount);
+      this.loyaltyCardService.updateBonusAmount(receipt.card, receipt.bonusAmount, receipt.minusBonus);
       const loyaltyCard = await this.loyaltyCardService.getLoyaltyCardByUserId(receipt.client)
       this.businessService.addReceiptToBusiness(loyaltyCard.business, data);
 
@@ -48,6 +49,15 @@ export class ReceiptService {
   public async getAllReceipts() {
     try {
       const data = await Receipt.find();
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async getReceiptById(_receiptId: string) {
+    try {
+      const data = await Receipt.findById(_receiptId);
       return data;
     } catch (error) {
       throw error;
