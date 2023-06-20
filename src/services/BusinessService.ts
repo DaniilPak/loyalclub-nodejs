@@ -48,8 +48,12 @@ export class BusinessService {
   public async deleteWorker(workerId: string, businessId: string) {
     try {
       const business = await BusinessModel.findById(businessId);
-      business.workers.pull(workerId);
-      business.save();
+      const workerIndex = business.workers.indexOf(workerId);
+
+      if (workerIndex !== -1) {
+        business.workers.splice(workerIndex, 1);
+        business.save();
+      }
 
       return business;
     } catch (error) {

@@ -63,6 +63,10 @@ const dataSchema = new mongoose.Schema({
     ref: "User",
   },
   receipts: [receiptSchema]
-});
+},
+  {
+    versionKey: '__v' // Enable versioning with '__v' as the version key
+  }
+);
 
 module.exports = mongoose.model("Business", dataSchema);

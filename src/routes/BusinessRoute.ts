@@ -26,11 +26,11 @@ export class BusinessRoute {
       this.businessController.createBusiness.bind(this.businessController)
     );
     this.router.post(
-      "/worker",
+      "/workeradd",
       this.businessController.addWorker.bind(this.businessController)
     );
-    this.router.delete(
-      "/worker",
+    this.router.post(
+      "/workerdelete",
       this.businessController.deleteWorker.bind(this.businessController)
     );
     this.router.post(
@@ -41,6 +41,10 @@ export class BusinessRoute {
     this.router.post(
       "/getbusinessbyid",
       this.businessController.getBusinessById.bind(this.businessController)
+    );
+    this.router.post(
+      "/getbusinesswithworkers",
+      this.businessController.getBusinessWorkersByBid.bind(this.businessController)
     );
   }
 

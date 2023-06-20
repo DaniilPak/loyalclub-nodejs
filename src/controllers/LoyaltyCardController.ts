@@ -37,7 +37,8 @@ export class LoyaltyCardController {
         userOwner: cliendId,
         business: businessId,
         receipts: [],
-        businessName: 't',
+        businessName: businessObject.name,
+        currencySign: businessObject.currencySign,
       }
 
       if (!existingLoyaltyCard) {
@@ -81,6 +82,7 @@ export class LoyaltyCardController {
         business,
         receipts,
         businessName,
+        currencySign: businessObject.currencySign,
       };
 
       const data = await this.loyaltyCardService.createLoyaltyCard(

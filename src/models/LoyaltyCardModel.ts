@@ -55,6 +55,10 @@ const dataSchema = new mongoose.Schema({
   bonusAmount: {
     required: true,
     type: Number,
+  },
+  currencySign: {
+    required: false,
+    type: String,
   }
 },
   {

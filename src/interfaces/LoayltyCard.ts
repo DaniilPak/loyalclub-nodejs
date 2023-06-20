@@ -7,4 +7,5 @@ export interface LoyaltyCard {
   business: Business;
   receipts: Receipt[];
   businessName: string;
+  currencySign: string;
 }

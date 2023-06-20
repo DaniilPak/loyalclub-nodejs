@@ -16,6 +16,28 @@ export class BusinessController {
     this.userService = userService;
   }
 
+  async getBusinessWorkersByBid(req: Request, res: Response): Promise<void> {
+    try {
+      const { businessId } = req.body;
+
+      const data = await this.businessService.getBusinessById(businessId);
+      let workers = [];
+
+      data.workers.forEach(worker => {
+        this.userService.getUserById(worker)
+          .then(workerDetails => {
+            workers.push(workerDetails);
+          })
+          .finally(() => res.status(200).json(workers))
+          .catch(err => console.log(err));
+      });
+
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Internal server error");
+    }
+  }
+
   async getBusinessById(req: Request, res: Response): Promise<void> {
     try {
       const { businessId } = req.body;
