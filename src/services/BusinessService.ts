@@ -1,4 +1,4 @@
-const BusinessModel = require("../models/businessModel");
+const BusinessModel = require("../models/BusinessModel");
 
 import { Business } from "../interfaces/Business";
 
