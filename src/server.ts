@@ -44,6 +44,6 @@ const swaggerDocument = require("../swagger.json");
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 /// Main entry
-app.listen(5001, () => {
+app.listen(3000, () => {
   console.log(`Server Started at ${3000}`);
 });
