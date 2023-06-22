@@ -1,4 +1,4 @@
-const Receipt = require("../models/receiptModel");
+const Receipt = require("../models/ReceiptModel");
 
 import { LoyaltyCard } from "../interfaces/LoayltyCard";
 import { Receipt } from "../interfaces/Receipt";
