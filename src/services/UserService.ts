@@ -3,7 +3,7 @@ import { Worker } from "../interfaces/Worker";
 import { Owner } from "../interfaces/Owner";
 import { Receipt } from "../interfaces/Receipt";
 
-const UserModel = require("../models/userModel");
+const UserModel = require("../models/UserModel");
 
 export class UserService {
   public async createUser(user: User) {
