@@ -30,6 +30,7 @@ export class ReceiptService {
       worker: receipt.worker,
       bonusAmount: receipt.bonusAmount,
       minusBonus: receipt.minusBonus,
+      currencySign: receipt.currencySign,
     });
 
     try {

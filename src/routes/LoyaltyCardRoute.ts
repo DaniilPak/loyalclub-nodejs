@@ -4,6 +4,7 @@ import { Router } from "express";
 import { LoyaltyCardController } from "../controllers/LoyaltyCardController";
 import { LoyaltyCardService } from "../services/LoyaltyCardService";
 import { BusinessService } from "../services/BusinessService";
+import { UserService } from "../services/UserService";
 
 export class LoyaltyCardRoute {
   private readonly router: Router;
@@ -11,7 +12,7 @@ export class LoyaltyCardRoute {
 
   constructor() {
     this.router = Router();
-    this.loyaltyCardController = new LoyaltyCardController(new LoyaltyCardService(), new BusinessService());
+    this.loyaltyCardController = new LoyaltyCardController(new LoyaltyCardService(), new BusinessService(), new UserService());
     this.setupRoutes();
   }
 

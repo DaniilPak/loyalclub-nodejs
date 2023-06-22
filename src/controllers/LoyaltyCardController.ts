@@ -2,14 +2,17 @@ import { Request, Response } from "express";
 import { LoyaltyCardService } from "../services/LoyaltyCardService";
 import { LoyaltyCard } from "../interfaces/LoayltyCard";
 import { BusinessService } from "../services/BusinessService";
+import { UserService } from "../services/UserService";
 
 export class LoyaltyCardController {
   private readonly loyaltyCardService: LoyaltyCardService;
   private readonly businessService: BusinessService;
+  private readonly userService: UserService;
 
-  constructor(loyaltyCardService: LoyaltyCardService, businessService: BusinessService) {
+  constructor(loyaltyCardService: LoyaltyCardService, businessService: BusinessService, userService: UserService) {
     this.loyaltyCardService = loyaltyCardService;
     this.businessService = businessService;
+    this.userService = userService;
   }
 
   async getLoyaltyCardById(req: Request, res: Response): Promise<void> {
@@ -49,6 +52,10 @@ export class LoyaltyCardController {
         }
 
         newLoyaltyCard = await this.loyaltyCardService.createLoyaltyCard(loyaltyCard);
+
+        // Assign card to user
+        await this.userService.addNewLoyaltyCardToUser(cliendId, newLoyaltyCard._id);
+
         res.status(200).json(newLoyaltyCard);
       } else {
         res.status(200).json(existingLoyaltyCard);

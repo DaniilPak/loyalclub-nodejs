@@ -9,4 +9,5 @@ export interface Receipt {
   worker: Worker;
   bonusAmount: number;
   minusBonus: number;
+  currencySign: string;
 }

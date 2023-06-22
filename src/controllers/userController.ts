@@ -12,11 +12,47 @@ export class UserController {
     this.userService = userService;
   }
 
+  async addNewLoyaltyCardToUser(req: Request, res: Response): Promise<void> {
+    try {
+      const { cliendId, loyaltyCardId } = req.body;
+
+      const data = await this.userService.addNewLoyaltyCardToUser(cliendId, loyaltyCardId);
+      res.status(200).json(data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Internal server error");
+    }
+  }
+
+  async getUserByPhoneNumber(req: Request, res: Response): Promise<void> {
+    try {
+      const { phoneNumber } = req.body;
+
+      const data = await this.userService.getUserByPhoneNumber(phoneNumber);
+      res.status(200).json(data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Internal server error");
+    }
+  }
+
   async getUserById(req: Request, res: Response): Promise<void> {
     try {
       const { userId } = req.body;
 
       const data = await this.userService.getUserById(userId);
+      res.status(200).json(data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Internal server error");
+    }
+  }
+
+  async updateWorker(req: Request, res: Response): Promise<void> {
+    try {
+      const { workerId, type, workBusiness } = req.body;
+
+      const data = await this.userService.updateWorker(workerId, type, workBusiness);
       res.status(200).json(data);
     } catch (err) {
       console.error(err);
@@ -37,6 +73,13 @@ export class UserController {
   async createUser(req: Request, res: Response): Promise<void> {
     try {
       const user: User = req.body;
+
+      // Check for existing user
+      const existingUser = await this.userService.getUserByPhoneNumber(user.phoneNumber);
+      if (existingUser) {
+        res.status(500).send("User exists, cant register with same number");
+      }
+
       const data = await this.userService.createUser(user);
       res.status(201).json(data);
     } catch (err) {

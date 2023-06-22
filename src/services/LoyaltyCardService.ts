@@ -12,6 +12,7 @@ export class LoyaltyCardService {
       receipts: loyaltyCard.receipts,
       businessName: loyaltyCard.businessName,
       bonusAmount: 0,
+      currencySign: loyaltyCard.currencySign,
     });
 
     try {

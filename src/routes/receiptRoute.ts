@@ -6,6 +6,7 @@ import { ReceiptService } from "../services/ReceiptService";
 import { UserService } from "../services/UserService";
 import { LoyaltyCardService } from "../services/LoyaltyCardService";
 import { BusinessService } from "../services/BusinessService";
+import { checkToken } from "../middlewares/checkToken";
 
 export class ReceiptRoute {
   private readonly router: Router;
@@ -33,6 +34,7 @@ export class ReceiptRoute {
     );
     this.router.post(
       "/",
+      checkToken,
       this.receiptController.createReceipt.bind(this.receiptController)
     );
     this.router.post(

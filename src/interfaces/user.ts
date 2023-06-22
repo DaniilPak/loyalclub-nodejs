@@ -12,4 +12,5 @@ export interface User {
   paymentInfo?: string;
   orderHistory?: Receipt[];
   loyaltyCards?: LoyaltyCard[];
+  workBusiness?: string;
 }

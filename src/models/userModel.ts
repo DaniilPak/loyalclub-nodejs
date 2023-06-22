@@ -90,8 +90,7 @@ const dataSchema = new mongoose.Schema({
   /// For Worker User
   workBusiness: {
     required: false,
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Business",
+    type: String,
   },
   expirationDate: {
     required: false,

@@ -27,6 +27,7 @@ export class BusinessRoute {
     );
     this.router.post(
       "/workeradd",
+      checkToken,
       this.businessController.addWorker.bind(this.businessController)
     );
     this.router.post(

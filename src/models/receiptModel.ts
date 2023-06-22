@@ -29,6 +29,14 @@ const dataSchema = new mongoose.Schema({
     required: true,
     type: Number,
   },
+  minusBonus: {
+    required: false,
+    type: Number,
+  },
+  currencySign: {
+    required: false,
+    type: String,
+  }
 });
 
 module.exports = mongoose.model("Receipt", dataSchema);

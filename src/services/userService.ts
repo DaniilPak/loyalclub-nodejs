@@ -16,7 +16,9 @@ export class UserService {
       email: user.email,
       homeAddress: user.homeAddress,
       paymentInfo: user.paymentInfo,
-      orderHistory: user.orderHistory,
+      orderHistory: [],
+      loyaltyCards: [],
+      workBusiness: user.workBusiness,
     });
 
     try {
@@ -93,10 +95,39 @@ export class UserService {
     }
   }
 
+  public async updateWorker(workerId: string, type: string, workBusiness: string) {
+    try {
+      const data = await UserModel.findById(workerId);
+
+      try {
+        data.type = type;
+        data.workBusiness = workBusiness;
+        data.save();
+      } catch (error) {
+        throw error;
+      }
+
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   public async getUserByPhoneNumber(userPhoneNumber: string) {
     try {
       const data = await UserModel.findOne({ phoneNumber: userPhoneNumber });
       return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async addNewLoyaltyCardToUser(cliendId: string, loyaltyCardId: string) {
+    const userModel = await UserModel.findById(cliendId);
+
+    try {
+      userModel.loyaltyCards.push(loyaltyCardId);
+      userModel.save();
     } catch (error) {
       throw error;
     }

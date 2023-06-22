@@ -35,6 +35,10 @@ export class UserRoute {
       "/worker",
       this.userController.createWorker.bind(this.userController)
     );
+    this.router.post(
+      "/getuserbyphone",
+      this.userController.getUserByPhoneNumber.bind(this.userController)
+    );
   }
 
   public getRouter(): Router {

@@ -29,7 +29,7 @@ export class BusinessController {
             workers.push(workerDetails);
           })
           .finally(() => res.status(200).json(workers))
-          .catch(err => console.log(err));
+          .catch(err => res.status(500).send("Internal server error"));
       });
 
     } catch (err) {
@@ -88,6 +88,7 @@ export class BusinessController {
       const { workerId, businessId } = req.body;
 
       const data = await this.businessService.addWorker(workerId, businessId);
+      const updatedWorker = await this.userService.updateWorker(workerId, 'Worker', businessId);
       res.status(201).json(data);
     } catch (error) {
       console.error(error);
@@ -103,6 +104,8 @@ export class BusinessController {
         workerId,
         businessId
       );
+
+      await this.userService.updateWorker(workerId, 'Client', '');
       res.status(201).json(data);
     } catch (error) {
       console.error(error);
