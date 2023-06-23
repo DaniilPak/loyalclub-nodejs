@@ -32,6 +32,7 @@ export class BusinessRoute {
     );
     this.router.post(
       "/workerdelete",
+      checkToken,
       this.businessController.deleteWorker.bind(this.businessController)
     );
     this.router.post(
