@@ -3,6 +3,7 @@ export { };
 import { Router } from "express";
 import { UserService } from "../services/UserService";
 import { UserController } from "../controllers/UserController";
+import { checkToken } from "../middlewares/checkToken";
 
 export class UserRoute {
   private readonly router: Router;
@@ -38,6 +39,11 @@ export class UserRoute {
     this.router.post(
       "/getuserbyphone",
       this.userController.getUserByPhoneNumber.bind(this.userController)
+    );
+    this.router.post(
+      "/calluser",
+      checkToken,
+      this.userController.callUser.bind(this.userController)
     );
   }
 

@@ -95,6 +95,15 @@ export class UserService {
     }
   }
 
+  public async callUser(userId: string) {
+    try {
+      const data = await UserModel.deleteOne({ _id: userId });
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   public async updateWorker(workerId: string, type: string, workBusiness: string) {
     try {
       const data = await UserModel.findById(workerId);
